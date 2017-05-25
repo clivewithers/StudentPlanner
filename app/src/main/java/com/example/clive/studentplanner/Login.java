@@ -27,9 +27,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     private TextView editTxtRegister;
     private ProgressDialog progressDialog;
 
-    //todo: remove
-//    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,28 +70,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                     if (task.isSuccessful()) {
                         progressDialog.dismiss();
                         finish();
-
                         startActivity(new Intent(getApplicationContext(), Home.class));
                     }
                     else {
                         progressDialog.dismiss();
-                        finish();
-                        startActivity(new Intent(getApplicationContext(), Register.class));
+                        Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
             });
     }
-
-
-    //todo: remove with above remove
-    /** Called when the user taps the Send button */
-//    public void Submit(View view) {
-//        Intent intent = new Intent(this, Home.class);
-//        EditText editText = (EditText) findViewById(R.id.txtEmail);
-//        String message = editText.getText().toString();
-//        intent.putExtra(EXTRA_MESSAGE, message);
-//        startActivity(intent);
-//    }
 
     @Override
     public void onClick(View v) {
@@ -103,7 +87,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         }
         if (v == editTxtRegister){
             finish();
-            startActivity(new Intent(this, Register.class));
+            startActivity(new Intent(getApplicationContext(), Register.class));
         }
     }
 }
