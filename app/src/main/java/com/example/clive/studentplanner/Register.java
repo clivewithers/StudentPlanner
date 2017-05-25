@@ -32,12 +32,14 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        getSupportActionBar().setTitle("Study Planner - Register");
+        mAuth = FirebaseAuth.getInstance();
+
         btnRegister = (Button) findViewById(R.id.btnRegister);
         editTxtEmail = (EditText) findViewById(R.id.txtRegEmail);
         editTxtPassword = (EditText) findViewById(R.id.txtRegPassword);
         txtSignIn = (TextView) findViewById(R.id.txtSignIn);
         progressDialog = new ProgressDialog(this);
-        mAuth = FirebaseAuth.getInstance();
 
         if(mAuth.getCurrentUser() != null){
             finish();
