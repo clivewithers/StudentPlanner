@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Student Planner</string>
-    <string name="txt_email">Enter your email here</string>
+    <string name="txt_email">Enter email here</string>
     <string name="txt_password">Enter password here</string>
     <string name="btn_submit">Submit</string>
     <string name="txt_register">Click here to register</string>
     <string name="btn_reg_register">Register</string>
-    <string name="txt_reg_email">Enter a valid email address</string>
-    <string name="txt_reg_password">Enter a super secret password</string>
+    <string name="txt_reg_email">Enter valid email address</string>
+    <string name="txt_reg_password">Enter secret password</string>
     <string name="txt_reg_signIn">Click here to go back to sign in page</string>
 </resources>

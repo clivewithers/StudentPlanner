@@ -60,7 +60,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
 
         if(TextUtils.isEmpty(password)){
             // password is empty
-            Toast.makeText(this, "You must enter a super secret password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "You must enter super secret password", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -78,7 +78,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
                             finish();
                             startActivity(new Intent(getApplicationContext(), Home.class));
                         }else{
-                            Toast.makeText(getApplicationContext(), "The email you entered already exists. Please use the login page to sign in ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "The email you entered already exists. Please use sign in page", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
