@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "747494504421",
+    "firebase_url": "https://studentplanner-77f52.firebaseio.com",
+    "project_id": "studentplanner-77f52",
+    "storage_bucket": "studentplanner-77f52.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:747494504421:android:6a3b0326de6bfb64",
+        "android_client_info": {
+          "package_name": "com.example.clive.studentplanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "747494504421-c45tnl3tfaggj14i4r9k3qt2dod04l48.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.clive.studentplanner",
+            "certificate_hash": "1e8750db6610683aa6958bdd9cfe142b86945476"
+          }
+        },
+        {
+          "client_id": "747494504421-826tn5dnerrousnvkkjs54jv5ovdjbh3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxnwpqH8QetDRE8tYiap7uCPsdk8TrIKI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "747494504421-826tn5dnerrousnvkkjs54jv5ovdjbh3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
