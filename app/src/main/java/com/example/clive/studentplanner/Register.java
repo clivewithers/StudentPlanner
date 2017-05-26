@@ -77,6 +77,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
                         progressDialog.dismiss();
                         if(task.isSuccessful()){
                             // user is successfully registered and logged in
+                            Toast.makeText(getApplicationContext(), "Account created successfully", Toast.LENGTH_SHORT).show();
+                            mAuth.sendPasswordResetEmail(mAuth.getCurrentUser().getEmail());
                             finish();
                             startActivity(new Intent(getApplicationContext(), Home.class));
                         }else{

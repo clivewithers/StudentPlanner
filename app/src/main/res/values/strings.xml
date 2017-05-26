@@ -8,4 +8,17 @@
     <string name="txt_reg_email">Enter valid email address</string>
     <string name="txt_reg_password">Enter secret password</string>
     <string name="txt_reg_signIn">Click here to go back to sign in page</string>
+    <string name="btnCreate">Create</string>
+    <string name="txtEditStudId">Enter student Id</string>
+    <string name="txtEditFirstName">Enter first name</string>
+    <string name="txtEditLastName">Enter last name</string>
+    <string name="spnMajor">Select major</string>
+    <string-array name="major_list_bit">
+        <item>Select Major</item>
+        <item>Information Security</item>
+        <item>Networking</item>
+        <item>Programming</item>
+        <item>Software Engineering</item>
+        <item>Other</item>
+    </string-array>
 </resources>
