@@ -32,7 +32,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        getSupportActionBar().setTitle("Study Planner - Register");
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setTitle("Study Planner - Register ");
+        }
+
+
         mAuth = FirebaseAuth.getInstance();
 
         btnRegister = (Button) findViewById(R.id.btnRegister);
@@ -43,7 +47,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
 
         if(mAuth.getCurrentUser() != null){
             finish();
-            startActivity(new Intent(getApplicationContext(), Home.class));
+            startActivity(new Intent(getApplicationContext(), CreateProfile.class));
         }
 
         btnRegister.setOnClickListener(this);
@@ -77,10 +81,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
                         progressDialog.dismiss();
                         if(task.isSuccessful()){
                             // user is successfully registered and logged in
-                            Toast.makeText(getApplicationContext(), "Account created successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Account created and logged in", Toast.LENGTH_SHORT).show();
                             mAuth.sendPasswordResetEmail(mAuth.getCurrentUser().getEmail());
                             finish();
-                            startActivity(new Intent(getApplicationContext(), Home.class));
+                            startActivity(new Intent(getApplicationContext(), CreateProfile.class));
                         }else{
                             Toast.makeText(getApplicationContext(), "The email you entered already exists. Please use sign in page", Toast.LENGTH_SHORT).show();
                         }

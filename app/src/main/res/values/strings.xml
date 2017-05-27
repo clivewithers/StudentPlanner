@@ -13,7 +13,7 @@
     <string name="txtEditFirstName">Enter first name</string>
     <string name="txtEditLastName">Enter last name</string>
     <string name="spnMajor">Select major</string>
-    <string-array name="major_list_bit">
+    <string-array name="major">
         <item>Select Major</item>
         <item>Information Security</item>
         <item>Networking</item>
@@ -21,4 +21,8 @@
         <item>Software Engineering</item>
         <item>Other</item>
     </string-array>
+    <string name="btn_profile">Profile</string>
+    <string name="btn_courses">Courses</string>
+    <string name="btn_calendar">Calendar</string>
+    <string name="btn_add_times">Add Extra Time</string>
 </resources>
