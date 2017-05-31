@@ -1,18 +1,28 @@
 <resources>
     <string name="app_name">Student Planner</string>
+
     <string name="txt_email">Enter email here</string>
     <string name="txt_password">Enter password here</string>
-    <string name="btn_submit">Submit</string>
     <string name="txt_register">Click here to register</string>
-    <string name="btn_reg_register">Register</string>
     <string name="txt_reg_email">Enter valid email address</string>
     <string name="txt_reg_password">Enter secret password</string>
     <string name="txt_reg_signIn">Click here to go back to sign in page</string>
-    <string name="btnCreate">Create</string>
     <string name="txtEditStudId">Enter student Id</string>
     <string name="txtEditFirstName">Enter first name</string>
     <string name="txtEditLastName">Enter last name</string>
+
+    <string name="btn_submit">Submit</string>
+    <string name="btn_reg_register">Register</string>
+    <string name="btnCreate">Create</string>
+    <string name="btn_profile">Profile</string>
+    <string name="btn_courses">Courses</string>
+    <string name="btn_calendar">Calendar</string>
+    <string name="btn_add_times">Add Extra Time</string>
+    <string name="btn_add">Add Details</string>>
+
     <string name="spnMajor">Select major</string>
+    <string name="spn_programme">Programme</string>
+
     <string-array name="major">
         <item>Select Major</item>
         <item>Information Security</item>
@@ -21,8 +31,80 @@
         <item>Software Engineering</item>
         <item>Other</item>
     </string-array>
-    <string name="btn_profile">Profile</string>
-    <string name="btn_courses">Courses</string>
-    <string name="btn_calendar">Calendar</string>
-    <string name="btn_add_times">Add Extra Time</string>
+    <string-array name="programme">
+        <item>Bachelor of IT Year 1</item>
+        <item>Bachelor of IT Year 2</item>
+        <item>Bachelor of IT Year 3</item>
+        <item>Graduate Diploma in IT</item>
+        <item>IT Technical Support</item>
+        <item>Master of IT</item>
+        <item>Postgraduate Certificate in IT</item>
+        <item>Postgraduate Diploma in It</item>
+    </string-array>
+    <string-array name="level">
+        <item></item>
+        <item>Level 5</item>
+        <item>Level 6</item>
+        <item>Level 7</item>
+    </string-array>
+    <string-array name="Level5">
+        <item>Select Level 5 Paper</item>
+        <item>IT5152 Electronics I</item>
+        <item>IT5153 Electronics II</item>
+        <item>IT5156 Programming 1B</item>
+        <item>IT5159 Operating Systems</item>
+        <item>IT5162 Scripting I</item>
+        <item>IT5169 Software Engineering</item>
+        <item>IT5174 Networking I</item>
+        <item>IT5175 Networking II</item>
+        <item>IT5177 Emerging Technologies</item>
+        <item>IT5178 Communication Studies</item>
+        <item>IT5185 Programming 1A</item>
+        <item>IT5186 IT Mathmetics</item>
+        <item>IT5187 Proggramming Principles</item>
+        <item>IT5190 Linux System Admin I</item>
+        <item>IT5191 Enterprise Desktop Spt</item>
+    </string-array>
+    <string-array name="level6">
+        <item>Select Level 6 Paper</item>
+        <item>IT6221 Application Security</item>
+        <item>IT6222 Principles of Information Security</item>
+        <item>IT6256 Logical Database Design</item>
+        <item>IT6259 System Anlysis and Design</item>
+        <item>IT6260 Softeare Development</item>
+        <item>IT6262 Web Site Scripting Foundation</item>
+        <item>IT6265 Networking III</item>
+        <item>IT6266 Digital Forensics</item>
+        <item>IT6268 Project Management</item>
+        <item>IT6270 Networking IV</item>
+        <item>IT6253 Programming II</item>
+        <item>IT6273 Embedded Systems I</item>
+        <item>IT6276 Web Technology Integration</item>
+        <item>IT6277 Microcomputer Systems II</item>
+        <item>IT6280 Software Testing</item>
+        <item>IT6281 Network Infrastructure Support</item>
+        <item>IT6282 Advanced Communication</item>
+        <item>IT6285 Carrier Technology</item>
+        <item>IT6287 IT Operations</item>
+        <item>IT6289 Wireless Network Technologies</item>
+    </string-array>
+    <string-array name="level7">
+        <item>Select Level 7 Paper</item>
+        <item>IA7301 Info Security Mgmt and Assurance</item>
+        <item>IA7302 Info Assurance Network Fundamentals</item>
+        <item>IA7306 Incident Response and Computer Security</item>
+        <item>IA7308 Security Testing and Network Defence</item>
+        <item>IA7309 Enterprise Data Storage Technologies</item>
+        <item>IT7320 Development and Testing of Software</item>
+        <item>IT7351 Project</item>
+        <item>IT7356 Information Systems Management</item>
+        <item>IT7358 Human Interface Technology</item>
+        <item>IT7359 Advanced Database Systems</item>
+        <item>IT7368 Systems Engingeering</item>
+        <item>IT7369 Advanced Networking I</item>
+        <item>IT7370 Advanced Networking II</item>
+        <item>IT7374 Programming III</item>
+        <item>IT7375 Embedded Systems II</item>
+        <item>IT7382 Advanced Carrier Technology II</item>
+    </string-array>
 </resources>

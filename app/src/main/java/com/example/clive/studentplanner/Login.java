@@ -39,7 +39,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         mAuth = FirebaseAuth.getInstance();
 
         //Initialize references to views
-        btnSignIn = (Button) findViewById(R.id.btnSubmit);
+        btnSignIn = (Button) findViewById(R.id.btn_add);
         editTxtRegister = (TextView) findViewById(R.id.txtRegister);
         editTxtEmail = (EditText) findViewById(R.id.txtEmail);
         editTxtPassword = (EditText) findViewById(R.id.txtPassword);

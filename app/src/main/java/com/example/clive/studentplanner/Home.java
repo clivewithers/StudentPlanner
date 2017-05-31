@@ -1,5 +1,6 @@
 package com.example.clive.studentplanner;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -77,9 +78,13 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v) {
         if (v == btnProfile) {
             Toast.makeText(this, "Profile button selected - work in progress", Toast.LENGTH_LONG).show();
+            finish();
+            startActivity(new Intent(getApplicationContext(), CreateProfile.class));
         }
         if (v == btnCourses){
             Toast.makeText(this, "Courses button selected - work in progress", Toast.LENGTH_LONG).show();
+            finish();
+            startActivity(new Intent(getApplicationContext(), AddCourse.class));
         }
         if (v == btnCalendar) {
             Toast.makeText(this, "Calendar button selected - work in progress", Toast.LENGTH_LONG).show();
