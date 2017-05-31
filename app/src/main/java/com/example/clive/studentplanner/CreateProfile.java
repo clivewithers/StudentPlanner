@@ -3,6 +3,8 @@ package com.example.clive.studentplanner;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -32,7 +34,7 @@ public class CreateProfile extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_create_profile);
 
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Study Planner - CreateProfile");
+            getSupportActionBar().setTitle("Study Planner - Profile");
         }
 
         txtEditStudId = (EditText) findViewById(R.id.txtEditStudentId);
@@ -54,6 +56,14 @@ public class CreateProfile extends AppCompatActivity implements View.OnClickList
         btnCreate.setOnClickListener(this);
 
         }
+
+    @Override
+    //Places the 2 image menu top right of screen
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate and add items to action bar if present.
+        getMenuInflater().inflate(R.menu.top_menu, menu);
+        return true;
+    }
 
     public void saveDetails(){
         if(spnEditMajor.getSelectedItem().toString().equals("Select Major")){
@@ -80,6 +90,24 @@ public class CreateProfile extends AppCompatActivity implements View.OnClickList
 //            StudentDetails studentDetails = new StudentDetails(txtEditStudId.getText().toString().trim());
 //            mDetailsDatabaseReference.setValue(studentDetails);
             Toast.makeText(getApplicationContext(), "Details created", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        switch (item.getItemId()) {
+            case R.id.actionLogout:
+                mAuth.signOut();
+                finish();
+                startActivity(new Intent(getApplicationContext(), Login.class));
+                return true;
+            case R.id.actionHome:
+                finish();
+                startActivity(new Intent(getApplicationContext(), Home.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }

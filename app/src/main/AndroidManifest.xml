@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".CreateProfile" />
         <activity android:name=".Register" />
-        <activity android:name=".Home"></activity>
+        <activity android:name=".Home" />
+        <activity android:name=".AddCourse"></activity>
     </application>
 
 </manifest>

@@ -3,6 +3,8 @@ package com.example.clive.studentplanner;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -33,7 +35,18 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
         setContentView(R.layout.activity_home);
 
         mAuth = FirebaseAuth.getInstance();
+
+        if(mAuth.getCurrentUser() == null){
+            finish();
+            startActivity(new Intent(this, Login.class));
+        }
+
         final FirebaseUser user = mAuth.getCurrentUser();
+
+        String userId = "";
+        if (user != null){
+            userId = user.getUid();
+        }
 
         btnProfile = (Button) findViewById(R.id.btnProfile);
         btnCalendar = (Button) findViewById(R.id.btnCalendar);
@@ -49,15 +62,10 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
             getSupportActionBar().setTitle("Study Planner - Home ");
         }
 
-        String user_id = "";
-        if (user != null) {
-            user_id = user.getUid();
-        }
-
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("student").child(user_id);
+        DatabaseReference dbReference = FirebaseDatabase.getInstance().getReference().child("student").child(userId);
 
         //Attach an addValueEventListener to the database reference
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        dbReference.addValueEventListener(new ValueEventListener() {
             @Override
             //Method is called when the activity starts and if changes are made to the database
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -72,6 +80,14 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
 
             }
         });
+    }
+
+    @Override
+    //Places the 2 image menu top right of screen
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate and add items to action bar if present.
+        getMenuInflater().inflate(R.menu.top_menu, menu);
+        return true;
     }
 
     @Override
@@ -91,6 +107,23 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
         }
         if (v == btnExtra){
             Toast.makeText(this, "Extra button selected - work in progress", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.actionLogout:
+                mAuth.signOut();
+                finish();
+                startActivity(new Intent(getApplicationContext(), Login.class));
+                return true;
+            case R.id.actionHome:
+                finish();
+                startActivity(new Intent(getApplicationContext(), Home.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }
