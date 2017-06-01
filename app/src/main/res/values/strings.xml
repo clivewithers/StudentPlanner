@@ -10,18 +10,21 @@
     <string name="txtEditStudId">Enter student Id</string>
     <string name="txtEditFirstName">Enter first name</string>
     <string name="txtEditLastName">Enter last name</string>
+    <string name="txtLocation">Enter Room Number</string>
 
     <string name="btn_submit">Submit</string>
     <string name="btn_reg_register">Register</string>
     <string name="btnCreate">Create</string>
     <string name="btn_profile">Profile</string>
-    <string name="btn_courses">Courses</string>
+    <string name="btn_courses">Study Details</string>
     <string name="btn_calendar">Calendar</string>
     <string name="btn_add_times">Add Extra Time</string>
     <string name="btn_add">Add Details</string>>
 
-    <string name="spnMajor">Select major</string>
-    <string name="spn_programme">Programme</string>
+    <string name="spn_major">Select Major</string>
+    <string name="spn_programme">Course ID</string>
+    <string name="spn_weekday">Weekday</string>
+    <string name="spn_tutor"></string>
 
     <string-array name="major">
         <item>Select Major</item>

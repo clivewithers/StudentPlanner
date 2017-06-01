@@ -22,7 +22,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
     private Button btnProfile;
     private Button btnCourses;
     private Button btnCalendar;
-    private Button btnExtra;
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDetailsDatabaseReference;
@@ -51,15 +50,13 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
         btnProfile = (Button) findViewById(R.id.btnProfile);
         btnCalendar = (Button) findViewById(R.id.btnCalendar);
         btnCourses = (Button) findViewById(R.id.btnCourses);
-        btnExtra = (Button) findViewById(R.id.btnExtraTimes);
 
         btnProfile.setOnClickListener(this);
         btnCalendar.setOnClickListener(this);
         btnCourses.setOnClickListener(this);
-        btnExtra.setOnClickListener(this);
 
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Study Planner - Home ");
+            getSupportActionBar().setTitle("Home ");
         }
 
         DatabaseReference dbReference = FirebaseDatabase.getInstance().getReference().child("student").child(userId);
@@ -104,9 +101,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
         }
         if (v == btnCalendar) {
             Toast.makeText(this, "Calendar button selected - work in progress", Toast.LENGTH_LONG).show();
-        }
-        if (v == btnExtra){
-            Toast.makeText(this, "Extra button selected - work in progress", Toast.LENGTH_LONG).show();
         }
     }
 

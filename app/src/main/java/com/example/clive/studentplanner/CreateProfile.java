@@ -34,7 +34,7 @@ public class CreateProfile extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_create_profile);
 
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Study Planner - Profile");
+            getSupportActionBar().setTitle("Profile");
         }
 
         txtEditStudId = (EditText) findViewById(R.id.txtEditStudentId);

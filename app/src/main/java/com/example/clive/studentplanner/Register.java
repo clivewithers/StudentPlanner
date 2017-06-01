@@ -33,7 +33,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         setContentView(R.layout.activity_register);
 
         if (getSupportActionBar() != null){
-            getSupportActionBar().setTitle("Study Planner - Register ");
+            getSupportActionBar().setTitle("Register ");
         }
 
 

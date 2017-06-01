@@ -33,7 +33,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         setContentView(R.layout.activity_login);
 
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Study Planner - Login");
+            getSupportActionBar().setTitle("Login");
         }
 
         mAuth = FirebaseAuth.getInstance();
