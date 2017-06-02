@@ -2,11 +2,11 @@ package com.example.clive.studentplanner;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,11 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class Home extends AppCompatActivity implements View.OnClickListener{
-
-    private Button btnProfile;
-    private Button btnCourses;
-    private Button btnCalendar;
+public class Home extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDetailsDatabaseReference;
@@ -47,14 +43,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
             userId = user.getUid();
         }
 
-        btnProfile = (Button) findViewById(R.id.btnProfile);
-        btnCalendar = (Button) findViewById(R.id.btnCalendar);
-        btnCourses = (Button) findViewById(R.id.btnCourses);
-
-        btnProfile.setOnClickListener(this);
-        btnCalendar.setOnClickListener(this);
-        btnCourses.setOnClickListener(this);
-
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("Home ");
         }
@@ -77,31 +65,40 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
 
             }
         });
+
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+                findViewById(R.id.bottom_navigation);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.actionProfile:
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), CreateProfile.class));
+                                break;
+                            case R.id.actionAddStudy:
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), AddCourse.class));
+                                break;
+                            case R.id.actionCalendar:
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), Home.class));
+                                Toast.makeText(getApplicationContext(), "Under Development", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                        return false;
+                    }
+                });
     }
 
     @Override
     //Places the 2 image menu top right of screen
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate and add items to action bar if present.
-        getMenuInflater().inflate(R.menu.top_menu, menu);
+        getMenuInflater().inflate(R.menu.top_menu_home, menu);
         return true;
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v == btnProfile) {
-            Toast.makeText(this, "Profile button selected - work in progress", Toast.LENGTH_LONG).show();
-            finish();
-            startActivity(new Intent(getApplicationContext(), CreateProfile.class));
-        }
-        if (v == btnCourses){
-            Toast.makeText(this, "Courses button selected - work in progress", Toast.LENGTH_LONG).show();
-            finish();
-            startActivity(new Intent(getApplicationContext(), AddCourse.class));
-        }
-        if (v == btnCalendar) {
-            Toast.makeText(this, "Calendar button selected - work in progress", Toast.LENGTH_LONG).show();
-        }
     }
 
     @Override
@@ -111,10 +108,6 @@ public class Home extends AppCompatActivity implements View.OnClickListener{
                 mAuth.signOut();
                 finish();
                 startActivity(new Intent(getApplicationContext(), Login.class));
-                return true;
-            case R.id.actionHome:
-                finish();
-                startActivity(new Intent(getApplicationContext(), Home.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

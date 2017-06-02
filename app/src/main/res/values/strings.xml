@@ -11,13 +11,16 @@
     <string name="txtEditFirstName">Enter first name</string>
     <string name="txtEditLastName">Enter last name</string>
     <string name="txtLocation">Enter Room Number</string>
+    <string name="txt_study_times">View Study Times</string>
+    <string name="txt_add_study">Add Study Time</string>
+    <string name="txt_edit_profile">Edit Profile</string>
 
     <string name="btn_submit">Submit</string>
     <string name="btn_reg_register">Register</string>
     <string name="btnCreate">Create</string>
-    <string name="btn_profile">Profile</string>
-    <string name="btn_courses">Study Details</string>
-    <string name="btn_calendar">Calendar</string>
+    <string name="btn_profile">Edit Profile</string>
+    <string name="btn_courses">Add Study Details</string>
+    <string name="btn_calendar">View Calendar</string>
     <string name="btn_add_times">Add Extra Time</string>
     <string name="btn_add">Add Details</string>>
 
@@ -45,7 +48,7 @@
         <item>Postgraduate Diploma in It</item>
     </string-array>
     <string-array name="level">
-        <item></item>
+        <item>Select Level Paper</item>
         <item>Level 5</item>
         <item>Level 6</item>
         <item>Level 7</item>
@@ -109,5 +112,15 @@
         <item>IT7374 Programming III</item>
         <item>IT7375 Embedded Systems II</item>
         <item>IT7382 Advanced Carrier Technology II</item>
+    </string-array>
+    <string-array name="weekdays">
+        <item>Select A Weekday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
     </string-array>
 </resources>

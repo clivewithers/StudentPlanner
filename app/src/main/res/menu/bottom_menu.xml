@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/actionProfile"
+        android:title="@string/txt_edit_profile"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/profile"/>
+
+    <item android:id="@+id/actionAddStudy"
+        android:title="@string/txt_add_study"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/edit"/>
+
+    <item android:id="@+id/actionCalendar"
+        android:title="@string/txt_study_times"
+        android:icon="@drawable/details"
+        app:showAsAction="ifRoom"/>
+</menu>

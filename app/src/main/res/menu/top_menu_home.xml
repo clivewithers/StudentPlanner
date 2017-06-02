@@ -5,15 +5,9 @@
     tools:context="com.example.clive.studentplanner">
 
     <item
-        android:id="@+id/actionHome"
-        android:icon="@drawable/home"
-        android:title="@+id/home"
-        app:showAsAction="ifRoom"></item>
-
-    <item
         android:id="@+id/actionLogout"
         android:icon="@drawable/exit"
         android:title="@+id/logout"
-        app:showAsAction="ifRoom"></item>
+        app:showAsAction="always"></item>
 
 </menu>
