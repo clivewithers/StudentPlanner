@@ -102,10 +102,6 @@ public class CreateProfile extends AppCompatActivity implements View.OnClickList
                 finish();
                 startActivity(new Intent(getApplicationContext(), Login.class));
                 return true;
-            case R.id.actionHome:
-                finish();
-                startActivity(new Intent(getApplicationContext(), Home.class));
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
