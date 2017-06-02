@@ -46,12 +46,11 @@
     </string-array>
     <string-array name="level">
         <item>Select Level Paper</item>
-        <item>Level 5</item>
-        <item>Level 6</item>
-        <item>Level 7</item>
+        <item>Level 5 Papers</item>
+        <item>Level 6 Papers</item>
+        <item>Level 7 Papers</item>
     </string-array>
     <string-array name="Level5">
-        <item>Select Level 5 Paper</item>
         <item>IT5152 Electronics I</item>
         <item>IT5153 Electronics II</item>
         <item>IT5156 Programming 1B</item>
@@ -69,7 +68,6 @@
         <item>IT5191 Enterprise Desktop Spt</item>
     </string-array>
     <string-array name="level6">
-        <item>Select Level 6 Paper</item>
         <item>IT6221 Application Security</item>
         <item>IT6222 Principles of Information Security</item>
         <item>IT6256 Logical Database Design</item>
@@ -92,7 +90,6 @@
         <item>IT6289 Wireless Network Technologies</item>
     </string-array>
     <string-array name="level7">
-        <item>Select Level 7 Paper</item>
         <item>IA7301 Info Security Mgmt and Assurance</item>
         <item>IA7302 Info Assurance Network Fundamentals</item>
         <item>IA7306 Incident Response and Computer Security</item>
@@ -111,7 +108,6 @@
         <item>IT7382 Advanced Carrier Technology II</item>
     </string-array>
     <string-array name="weekdays">
-        <item>Select A Weekday</item>
         <item>Monday</item>
         <item>Tuesday</item>
         <item>Wednesday</item>
