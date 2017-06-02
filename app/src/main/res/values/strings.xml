@@ -10,7 +10,7 @@
     <string name="txtEditStudId">Enter student Id</string>
     <string name="txtEditFirstName">Enter first name</string>
     <string name="txtEditLastName">Enter last name</string>
-    <string name="txtLocation">Enter Room Number</string>
+    <string name="txtLocation">Room Number</string>
     <string name="txt_study_times">View Study Times</string>
     <string name="txt_add_study">Add Study Time</string>
     <string name="txt_edit_profile">Edit Profile</string>
@@ -19,10 +19,7 @@
     <string name="btn_reg_register">Register</string>
     <string name="btnCreate">Create</string>
     <string name="btn_profile">Edit Profile</string>
-    <string name="btn_courses">Add Study Details</string>
-    <string name="btn_calendar">View Calendar</string>
-    <string name="btn_add_times">Add Extra Time</string>
-    <string name="btn_add">Add Details</string>>
+    <string name="btn_courses">Add Study Details</string>>
 
     <string name="spn_major">Select Major</string>
     <string name="spn_programme">Course ID</string>

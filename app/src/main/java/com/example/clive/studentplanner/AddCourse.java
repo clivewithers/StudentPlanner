@@ -1,10 +1,13 @@
 package com.example.clive.studentplanner;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -18,7 +21,31 @@ public class AddCourse extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("Add Study Times");
         }
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+                findViewById(R.id.bottom_navigation);
 
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.actionProfile:
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), CreateProfile.class));
+                                break;
+                            case R.id.actionAddStudy:
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), AddCourse.class));
+                                break;
+                            case R.id.actionCalendar:
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), Home.class));
+                                Toast.makeText(getApplicationContext(), "Under Development", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                        return false;
+                    }
+                });
     }
 
     @Override

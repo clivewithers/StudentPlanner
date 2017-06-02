@@ -61,7 +61,7 @@ public class CreateProfile extends AppCompatActivity implements View.OnClickList
     //Places the 2 image menu top right of screen
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate and add items to action bar if present.
-        getMenuInflater().inflate(R.menu.top_menu, menu);
+        getMenuInflater().inflate(R.menu.top_menu_home, menu);
         return true;
     }
 
