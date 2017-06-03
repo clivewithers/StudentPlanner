@@ -11,25 +11,34 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class Home extends AppCompatActivity {
 
+    //Firebase instance variables
     private FirebaseAuth mAuth;
-    private DatabaseReference mDetailsDatabaseReference;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mStudyDatabaseReference;
+    private ChildEventListener mChildEventListener;
 
-    private String studentName = null;
+    private String studentName;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        //Instantiate objects
         mAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+
+        //Reference to write to firebase
+        mStudyDatabaseReference = mFirebaseDatabase.getReference().child("studyDetails");
 
         if(mAuth.getCurrentUser() == null){
             finish();
@@ -47,24 +56,47 @@ public class Home extends AppCompatActivity {
             getSupportActionBar().setTitle("Home ");
         }
 
-        DatabaseReference dbReference = FirebaseDatabase.getInstance().getReference().child("student").child(userId);
-
-        //Attach an addValueEventListener to the database reference
-        dbReference.addValueEventListener(new ValueEventListener() {
+        mChildEventListener = new ChildEventListener() {
             @Override
-            //Method is called when the activity starts and if changes are made to the database
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //Create a user information object and populate it using the data in the datasnapshot
-                StudentDetails studentDetails = dataSnapshot.getValue(StudentDetails.class);
-                //Get name from object and save it to a local variable
-                studentName = studentDetails.getFirstName();
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
-        });
+        };
+        mStudyDatabaseReference.addChildEventListener(mChildEventListener);
+
+//        DatabaseReference dbReference = FirebaseDatabase.getInstance().getReference().child("student").child(userId);
+//
+//        //Attach an addValueEventListener to the database reference
+//        dbReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            //Method is called when the activity starts and if changes are made to the database
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                //Create a user information object and populate it using the data in the datasnapshot
+//                StudentDetails studentDetails = dataSnapshot.getValue(StudentDetails.class);
+//                //Get name from object and save it to a local variable
+//                studentName = studentDetails.getFirstName();
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottom_navigation);

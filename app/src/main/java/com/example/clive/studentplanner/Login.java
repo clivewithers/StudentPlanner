@@ -18,7 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Login extends AppCompatActivity implements View.OnClickListener{
-
+    
     private FirebaseAuth mAuth;
 
     private EditText editTxtEmail;
@@ -50,6 +50,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
     }
 
+
     public void signIn(){
         final String email = editTxtEmail.getText().toString().trim();
         final String password = editTxtPassword.getText().toString().trim();
@@ -69,21 +70,25 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         progressDialog.setMessage("Logging on.......");
         progressDialog.show();
 
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            progressDialog.dismiss();
-                            finish();
-                            startActivity(new Intent(getApplicationContext(), Home.class));
+        try{
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                progressDialog.dismiss();
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), Home.class));
+                            }
+                            else {
+                                progressDialog.dismiss();
+                                Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            }
                         }
-                        else {
-                            progressDialog.dismiss();
-                            Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
+                    });
+        }catch(Exception e){
+                Toast.makeText(this, "Error is " + e, Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

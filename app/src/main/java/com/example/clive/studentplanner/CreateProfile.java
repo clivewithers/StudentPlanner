@@ -33,10 +33,12 @@ public class CreateProfile extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_profile);
 
+        //Set title
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("Profile");
         }
 
+        //IInastantiate variables
         txtEditStudId = (EditText) findViewById(R.id.txtEditStudentId);
         txtEditFirstName = (EditText) findViewById(R.id.txtEditFirst);
         txtEditLastName = (EditText) findViewById(R.id.txtEditLast);
