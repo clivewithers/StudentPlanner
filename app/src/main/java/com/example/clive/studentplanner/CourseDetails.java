@@ -8,18 +8,24 @@ public class CourseDetails {
 
     private String courseDay;
     private String courseId;
-    private String courseStartTime;
-    private String courseFinishTime;
+    private int courseStartTimeHour;
+    private int courseStartTimeMinute;
+    private int courseFinishTimeHour;
+    private int courseFinishTimeMinute;
     private String room;
 
     public CourseDetails(){}
 
-    public CourseDetails(String courseId, String courseDay, String courseStartTime, String courseFinishTime, String room) {
+    public CourseDetails(String courseId, String courseDay, String room,
+                         int courseStartTimeHour, int courseStartTimeMinute,
+                         int courseFinishTimeHour, int courseFinishTimeMinute) {
 
         this.courseId = courseId;
         this.courseDay = courseDay;
-        this.courseStartTime = courseStartTime;
-        this.courseFinishTime = courseFinishTime;
+        this.courseStartTimeHour = courseStartTimeHour;
+        this.courseStartTimeMinute = courseStartTimeMinute;
+        this.courseFinishTimeHour = courseFinishTimeHour;
+        this.courseFinishTimeMinute = courseFinishTimeMinute;
         this.room = room;
     }
     //    private String courseName;
@@ -27,9 +33,13 @@ public class CourseDetails {
 
     public String getCourseId() { return courseId; }
 
-    public String getCourseStartTime() { return courseStartTime; }
+    public int getCourseStartTimeHour() { return courseStartTimeHour; }
 
-    public String getCourseFinishTime() { return courseFinishTime; }
+    public int getCourseStartTimeMinute() { return courseStartTimeMinute; }
+
+    public int getCourseFinishTimeHour() { return courseFinishTimeHour; }
+
+    public int getCourseFinishTimeMinute() { return courseFinishTimeMinute; }
 
     public String getRoom() { return room; }
 
@@ -37,9 +47,13 @@ public class CourseDetails {
 
     public void   setCourseId(String courseId) { this.courseId = courseId; }
 
-    public void   setCourseStartTime(String courseStartTime) { this.courseStartTime = courseStartTime; }
+    public void   setCourseStartTimeHour(int courseStartTime) { this.courseStartTimeHour = courseStartTime; }
 
-    public void   setCourseFinishTime(String courseFinishTime) { this.courseFinishTime = courseFinishTime; }
+    public void   setCourseStartTimeMinute(int courseStartTime) { this.courseStartTimeMinute = courseStartTime; }
+
+    public void   setCourseFinishTimeHour(int courseFinishTime) { this.courseFinishTimeHour = courseFinishTime; }
+
+    public void   setCourseFinishTimeMinute(int courseFinishTime) { this.courseFinishTimeMinute = courseFinishTime; }
 
     public void   setRoom(String room) { this.room = room; }
 }
