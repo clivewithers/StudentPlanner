@@ -32,6 +32,7 @@ public class AddCourse extends AppCompatActivity implements AdapterView.OnItemSe
     private TimePicker finishTime;
     private TextView room;
     private String userId;
+    private  String userName;
     private Button btnAddCourse;
 
 
@@ -44,12 +45,16 @@ public class AddCourse extends AppCompatActivity implements AdapterView.OnItemSe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_course);
 
+        //Set time pickers to 24 hour views
+        startTime = (TimePicker) findViewById(R.id.timePickerTimeStart);
+        startTime.setIs24HourView(true);
+        finishTime = (TimePicker) findViewById(R.id.timePickerTimeFinish);
+        finishTime.setIs24HourView(true);
+
         //Variable instance variables
         weekday = (Spinner) findViewById(R.id.spn_DayOfWeek);
         paperLevel = (Spinner) findViewById(R.id.spnLevelPaper);
         courseId = (Spinner) findViewById(spnCourseId);
-        startTime = (TimePicker) findViewById(R.id.timePickerTimeStart);
-        finishTime = (TimePicker) findViewById(R.id.timePickerTimeFinish);
         room = (TextView) findViewById(R.id.txtEditLocation);
         btnAddCourse = (Button) findViewById(R.id.btn_courses);
 
@@ -63,7 +68,8 @@ public class AddCourse extends AppCompatActivity implements AdapterView.OnItemSe
 
         //Set title in action bar
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Add Study Times");
+            getSupportActionBar().setTitle("Add Study Times " + userName);
+        }
 
         //Authenticate user, if user not authenticated send to login screen
         if(mAuth.getCurrentUser() == null){
@@ -80,24 +86,25 @@ public class AddCourse extends AppCompatActivity implements AdapterView.OnItemSe
         }
 
         //Populate weekday array
-        ArrayAdapter adaptor = ArrayAdapter.createFromResource(this, R.array.weekdays, android.R.layout.simple_spinner_item);
-        weekday.setAdapter(adaptor);
-        weekday.setOnItemSelectedListener(this);
+        final ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.weekdays, android.R.layout.simple_spinner_item);
+        //       weekday.setAdapter(adapter);
+        //       weekday.setOnItemSelectedListener(this);
 
         //Populate paper level spinner with array from string file
-        ArrayAdapter adaptorpaperLevel = ArrayAdapter.createFromResource(this, R.array.level, android.R.layout.simple_spinner_item);
-        paperLevel.setAdapter(adaptorpaperLevel);
-        paperLevel.setOnItemSelectedListener(this);
+        ArrayAdapter adapterPaperLevel = ArrayAdapter.createFromResource(this, R.array.level, android.R.layout.simple_spinner_item);
+        paperLevel.setAdapter(adapterPaperLevel);
+        //       paperLevel.setOnItemSelectedListener(this);
 
         //Array instances be to used on selection of paper level
         final ArrayAdapter adaptorCourse5 = ArrayAdapter.createFromResource(this, R.array.Level5, android.R.layout.simple_spinner_item);
         final ArrayAdapter adaptorCourse6 = ArrayAdapter.createFromResource(this, R.array.level6, android.R.layout.simple_spinner_item);
         final ArrayAdapter adaptorCourse7 = ArrayAdapter.createFromResource(this, R.array.level7, android.R.layout.simple_spinner_item);
 
-        courseId.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item));
+//        courseId.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item));
 
+        //This is causing all of your spinner box issues.
         //loop to populate courses spinner bases on paper level selected
-        do {
+  /*      do {
                 paperLevel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -114,13 +121,46 @@ public class AddCourse extends AppCompatActivity implements AdapterView.OnItemSe
                     }
 
                     @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-                        return;
-                    }
+                    public void onNothingSelected(AdapterView<?> adapterView) {}
                 });
         }
         while (courseId.getSelectedItemPosition() == 0);
-        }
+
+        */
+
+        paperLevel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 1){
+                    courseId.setAdapter(adaptorCourse5);
+                }else if (position == 2){
+                    courseId.setAdapter(adaptorCourse6);
+                }else if (position == 3){
+                    courseId.setAdapter(adaptorCourse7);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        courseId.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(! courseId.getSelectedItem().toString().equals("Select Paper"))
+                {
+                    weekday.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         //Set the bottom navigation
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
@@ -190,20 +230,23 @@ public class AddCourse extends AppCompatActivity implements AdapterView.OnItemSe
     }
 
     private void saveCourse() {
-        if (courseId.getSelectedItemPosition() == 0) {
+        if(paperLevel.getSelectedItem().toString().equals("Select Level Paper")){
+            Toast.makeText(this, "Please select a level of paper to continue", Toast.LENGTH_LONG).show();
+        }else if (courseId.getSelectedItemPosition() == 0) {
             Toast.makeText(this, "Please select a course to continue", Toast.LENGTH_LONG).show();
-        }
-        if (room.equals("")) {
+        }else if (room.getText().equals("")) {
             Toast.makeText(this, "Please select a location for study. " +
                     "Or enter HOME if it is self study", Toast.LENGTH_LONG).show();
-        } else {
+        }else {
             String location = room.getText().toString().trim();
             String Id = courseId.getSelectedItem().toString().trim();
-            String start = startTime.toString().trim();
-            String finish = finishTime.toString().trim();
+            int startHour = startTime.getHour();
+            int startMinute = startTime.getMinute();
+            int finishHour = finishTime.getHour();
+            int finishMinute = finishTime.getMinute();
             String day = weekday.getSelectedItem().toString().trim();
 
-            CourseDetails courseDetails = new CourseDetails(Id, day, finish, start, location);
+            CourseDetails courseDetails = new CourseDetails(Id, day, location, startHour, startMinute, finishHour, finishMinute);
 
             mStudyDatabaseReference.push().setValue(courseDetails);
 
@@ -215,5 +258,4 @@ public class AddCourse extends AppCompatActivity implements AdapterView.OnItemSe
     public void onClick(View v) {
         saveCourse();
     }
-
 }

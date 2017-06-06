@@ -5,27 +5,31 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class Home extends AppCompatActivity {
 
+    //    private DetailsAdapter DetailsAdapter;
+    private ArrayList<CourseDetails> myDataset = new ArrayList<>();
+    private RecyclerView mRecyclerView;
+    // private CourseDetails myDataset;
+
     //Firebase instance variables
     private FirebaseAuth mAuth;
-    private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mStudyDatabaseReference;
-    private ChildEventListener mChildEventListener;
 
-    private String studentName;
     private String userId;
 
     @Override
@@ -35,68 +39,101 @@ public class Home extends AppCompatActivity {
 
         //Instantiate objects
         mAuth = FirebaseAuth.getInstance();
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
 
-        //Reference to write to firebase
-        mStudyDatabaseReference = mFirebaseDatabase.getReference().child("studyDetails");
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewDetails);
 
         if(mAuth.getCurrentUser() == null){
             finish();
             startActivity(new Intent(this, Login.class));
         }
 
-        final FirebaseUser user = mAuth.getCurrentUser();
-
-        String userId = "";
-        if (user != null){
-            userId = user.getUid();
-        }
-
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("Home ");
         }
 
-        mChildEventListener = new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-            }
+        //Reference to write to firebase
+        DatabaseReference mStudyDatabaseReference = mFirebaseDatabase.getReference().child("studyDetails").child(mAuth.getCurrentUser().getUid());
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-            }
+        // mAdapter = new EventAdapter(myDataset);
 
+        mStudyDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                    myDataset.add(ds.getValue(CourseDetails.class));
+                }
+                populateView();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-            }
-        };
-        mStudyDatabaseReference.addChildEventListener(mChildEventListener);
 
-//        DatabaseReference dbReference = FirebaseDatabase.getInstance().getReference().child("student").child(userId);
+            }
+        });
+
+
+//        mRecyclerView.setAdapter(mAdapter);
+
+ /*
+        mRecyclerView.setHasFixedSize(true);
+        */
+//        mLayoutManager = new GridLayoutManager(this, 2);
+//        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //new GetDataFromFirebase().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
 //
-//        //Attach an addValueEventListener to the database reference
-//        dbReference.addValueEventListener(new ValueEventListener() {
+
+
+//        mChildEventListener = new ChildEventListener() {
 //            @Override
-//            //Method is called when the activity starts and if changes are made to the database
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                //Create a user information object and populate it using the data in the datasnapshot
-//                StudentDetails studentDetails = dataSnapshot.getValue(StudentDetails.class);
-//                //Get name from object and save it to a local variable
-//                studentName = studentDetails.getFirstName();
+//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+//                CourseDetails courseDetails = dataSnapshot.getValue(CourseDetails.class);
+//
+//                myDataset.add(courseDetails);
+//            }
+//
+//            @Override
+//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+//            }
+//
+//            @Override
+//            public void onChildRemoved(DataSnapshot dataSnapshot) {
+//            }
+//
+//            @Override
+//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 //            }
 //
 //            @Override
 //            public void onCancelled(DatabaseError databaseError) {
-//
+//                Toast.makeText(getApplicationContext(), "Permission denied", Toast.LENGTH_SHORT).show();
 //            }
-//        });
+//        };
+//        mStudyDatabaseReference.addChildEventListener(mChildEventListener);
+
+
+
+/*        DatabaseReference dbReference = FirebaseDatabase.getInstance().getReference().child("student").child(userId);
+
+        //Attach an addValueEventListener to the database reference
+        dbReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            //Method is called when the activity starts and if changes are made to the database
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //Create a user information object and populate it using the data in the datasnapshot
+                StudentDetails studentDetails = dataSnapshot.getValue(StudentDetails.class);
+                //Get name from object and save it to a local variable
+                studentName = studentDetails.getFirstName();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+*/
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottom_navigation);
@@ -123,6 +160,14 @@ public class Home extends AppCompatActivity {
                         return false;
                     }
                 });
+    }
+
+    public void populateView(){
+        LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
+        mRecyclerView.setLayoutManager(llm);
+
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(myDataset);
+        mRecyclerView.setAdapter(adapter);
     }
 
     @Override
