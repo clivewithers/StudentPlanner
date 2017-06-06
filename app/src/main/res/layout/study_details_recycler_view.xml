@@ -48,7 +48,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:text="Subject: "
                     android:textColor="#000000"
@@ -68,7 +68,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="90dp"
                     android:layout_height="wrap_content"
                     android:text="Room: "
                     android:textColor="#000000"
@@ -87,29 +87,31 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Start Time: "
-                        android:textColor="#000000"
-                        android:textSize="15dp" />
+                <TextView
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:text="Start Time:  "
+                    android:textColor="#000000"
+                    android:textSize="15dp" />
 
-                    <TextView
-                        android:id="@+id/textStartHour"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:textSize="15dp" />
+                <TextView
+                    android:id="@+id/textStartHour"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textEnd"
+                    android:textSize="15dp" />
 
                     <TextView
                         android:layout_width="20dp"
                         android:layout_height="wrap_content"
                         android:text=" : " />
 
-                    <TextView
-                        android:id="@+id/textStartMinute"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:textSize="15dp" />
+                <TextView
+                    android:id="@+id/textStartMinute"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textStart"
+                    android:textSize="15dp" />
 
                 </LinearLayout>
 
@@ -118,29 +120,31 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Finish Time: "
-                        android:textColor="#000000"
-                        android:textSize="15dp" />
+                   <TextView
+                       android:layout_width="90dp"
+                       android:layout_height="wrap_content"
+                       android:text="Finish Time: "
+                       android:textColor="#000000"
+                       android:textSize="15dp" />
 
-                    <TextView
-                        android:id="@+id/textFinishHour"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:textSize="15dp" />
+                   <TextView
+                       android:id="@+id/textFinishHour"
+                       android:layout_width="40dp"
+                       android:layout_height="wrap_content"
+                       android:textAlignment="textEnd"
+                       android:textSize="15dp" />
 
                     <TextView
                         android:layout_width="20dp"
                         android:layout_height="wrap_content"
                         android:text=" : " />
 
-                    <TextView
-                        android:id="@+id/textFinishMinute"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:textSize="15dp" />
+                   <TextView
+                       android:id="@+id/textFinishMinute"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:textAlignment="textStart"
+                       android:textSize="15dp" />
 
                 </LinearLayout>
 

@@ -7,6 +7,7 @@ package com.example.clive.studentplanner;
 public class CourseDetails {
 
     private String courseDay;
+    private int dayInt;
     private String courseId;
     private int courseStartTimeHour;
     private int courseStartTimeMinute;
@@ -16,12 +17,13 @@ public class CourseDetails {
 
     public CourseDetails(){}
 
-    public CourseDetails(String courseId, String courseDay, String room,
+    public CourseDetails(String courseId, String courseDay, int dayInt, String room,
                          int courseStartTimeHour, int courseStartTimeMinute,
                          int courseFinishTimeHour, int courseFinishTimeMinute) {
 
         this.courseId = courseId;
         this.courseDay = courseDay;
+        this.dayInt = dayInt;
         this.courseStartTimeHour = courseStartTimeHour;
         this.courseStartTimeMinute = courseStartTimeMinute;
         this.courseFinishTimeHour = courseFinishTimeHour;
@@ -30,6 +32,8 @@ public class CourseDetails {
     }
     //    private String courseName;
     public  String getCourseDay() { return courseDay; }
+
+    public int getDayInt() { return dayInt; }
 
     public String getCourseId() { return courseId; }
 
@@ -45,6 +49,8 @@ public class CourseDetails {
 
     public void   setCourseDay(String courseDay) { this.courseDay = courseDay; }
 
+    public void   setDaiInt(int courseDay) { this.dayInt = dayInt; }
+
     public void   setCourseId(String courseId) { this.courseId = courseId; }
 
     public void   setCourseStartTimeHour(int courseStartTime) { this.courseStartTimeHour = courseStartTime; }
@@ -56,4 +62,5 @@ public class CourseDetails {
     public void   setCourseFinishTimeMinute(int courseFinishTime) { this.courseFinishTimeMinute = courseFinishTime; }
 
     public void   setRoom(String room) { this.room = room; }
+
 }

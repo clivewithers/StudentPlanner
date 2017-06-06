@@ -16,6 +16,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class Home extends AppCompatActivity {
     //Firebase instance variables
     private FirebaseAuth mAuth;
 
-    private String userId;
+    private String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,15 +56,17 @@ public class Home extends AppCompatActivity {
         //Reference to write to firebase
         DatabaseReference mStudyDatabaseReference = mFirebaseDatabase.getReference().child("studyDetails").child(mAuth.getCurrentUser().getUid());
 
-        // mAdapter = new EventAdapter(myDataset);
+        //Reference query that orders snapshot by day -- need to change day to store int
+        Query detailsQuery = mFirebaseDatabase.getReference().child("studyDetails").child(mAuth.getCurrentUser().getUid()).orderByChild("dayInt");
 
-        mStudyDatabaseReference.addValueEventListener(new ValueEventListener() {
+        detailsQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds: dataSnapshot.getChildren()){
                     myDataset.add(ds.getValue(CourseDetails.class));
                 }
                 populateView();
+
             }
 
             @Override
@@ -71,6 +74,21 @@ public class Home extends AppCompatActivity {
 
             }
         });
+
+//        mStudyDatabaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for(DataSnapshot ds: dataSnapshot.getChildren()){
+//                    myDataset.add(ds.getValue(CourseDetails.class));
+//                }
+//                populateView();
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
 
 
 //        mRecyclerView.setAdapter(mAdapter);

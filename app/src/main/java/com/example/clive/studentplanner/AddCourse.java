@@ -26,6 +26,7 @@ import static com.example.clive.studentplanner.R.id.spnCourseId;
 public class AddCourse extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     private Spinner weekday;
+    private int dayInt;
     private Spinner paperLevel;
     private Spinner courseId;
     private TimePicker startTime;
@@ -191,6 +192,32 @@ public class AddCourse extends AppCompatActivity implements AdapterView.OnItemSe
                 });
     }
 
+    private void setDayInt(String day) {
+        switch (day){
+            case "Monday":
+               dayInt = 1;
+                break;
+            case "Tuesday":
+                dayInt = 2;
+                break;
+            case "Wednesday":
+                dayInt = 3;
+                break;
+            case "Thursday":
+                dayInt = 4;
+                break;
+            case "Friday":
+                dayInt = 5;
+                break;
+            case "Saturday":
+                dayInt = 6;
+                break;
+            case "Sunday":
+                dayInt = 7;
+                break;
+        }
+    }
+
     @Override
     //Places the 2 image menu top right of screen
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -245,8 +272,9 @@ public class AddCourse extends AppCompatActivity implements AdapterView.OnItemSe
             int finishHour = finishTime.getHour();
             int finishMinute = finishTime.getMinute();
             String day = weekday.getSelectedItem().toString().trim();
+            setDayInt(day);
 
-            CourseDetails courseDetails = new CourseDetails(Id, day, location, startHour, startMinute, finishHour, finishMinute);
+            CourseDetails courseDetails = new CourseDetails(Id, day, dayInt, location, startHour, startMinute, finishHour, finishMinute);
 
             mStudyDatabaseReference.push().setValue(courseDetails);
 
