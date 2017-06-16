@@ -32,8 +32,6 @@ public class AddCourse extends AppCompatActivity implements AdapterView.OnItemSe
     private TimePicker startTime;
     private TimePicker finishTime;
     private TextView room;
-    private String userId;
-    private  String userName;
     private Button btnAddCourse;
 
 
@@ -59,17 +57,19 @@ public class AddCourse extends AppCompatActivity implements AdapterView.OnItemSe
         room = (TextView) findViewById(R.id.txtEditLocation);
         btnAddCourse = (Button) findViewById(R.id.btn_courses);
 
-        //Firebase instance variables
+        //Initialise FirebaseAuth instance
         mAuth = FirebaseAuth.getInstance();
+
+        //Entry point to Firebase database
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mStudyDatabaseReference = mFirebaseDatabase.getReference().child("studyDetails").child(mAuth.getCurrentUser().getUid());
 
-        //Set button listener
+        //Set onClick listeners
         btnAddCourse.setOnClickListener(this);
 
         //Set title in action bar
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Add Study Times " + userName);
+            getSupportActionBar().setTitle("Add Study Times ");
         }
 
         //Authenticate user, if user not authenticated send to login screen
@@ -81,54 +81,19 @@ public class AddCourse extends AppCompatActivity implements AdapterView.OnItemSe
         //Assign user Id to a variable
         final FirebaseUser user = mAuth.getCurrentUser();
 
-        String userId = "";
-        if (user != null){
-            userId = user.getUid();
-        }
-
         //Populate weekday array
         final ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.weekdays, android.R.layout.simple_spinner_item);
-        //       weekday.setAdapter(adapter);
-        //       weekday.setOnItemSelectedListener(this);
 
         //Populate paper level spinner with array from string file
         ArrayAdapter adapterPaperLevel = ArrayAdapter.createFromResource(this, R.array.level, android.R.layout.simple_spinner_item);
         paperLevel.setAdapter(adapterPaperLevel);
-        //       paperLevel.setOnItemSelectedListener(this);
 
         //Array instances be to used on selection of paper level
         final ArrayAdapter adaptorCourse5 = ArrayAdapter.createFromResource(this, R.array.Level5, android.R.layout.simple_spinner_item);
         final ArrayAdapter adaptorCourse6 = ArrayAdapter.createFromResource(this, R.array.level6, android.R.layout.simple_spinner_item);
         final ArrayAdapter adaptorCourse7 = ArrayAdapter.createFromResource(this, R.array.level7, android.R.layout.simple_spinner_item);
 
-//        courseId.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item));
-
-        //This is causing all of your spinner box issues.
-        //loop to populate courses spinner bases on paper level selected
-  /*      do {
-                paperLevel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        if (position == 1){
-                            courseId.setAdapter(adaptorCourse5);
-                            courseId.setOnItemSelectedListener(this);
-                        }else if (position == 2){
-                            courseId.setAdapter(adaptorCourse6);
-                            courseId.setOnItemSelectedListener(this);
-                        }else if (position == 3){
-                            courseId.setAdapter(adaptorCourse7);
-                            courseId.setOnItemSelectedListener(this);
-                        }
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {}
-                });
-        }
-        while (courseId.getSelectedItemPosition() == 0);
-
-        */
-
+        //Select correct ArrayAdapter to use from users paper level selection
         paperLevel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -192,6 +157,7 @@ public class AddCourse extends AppCompatActivity implements AdapterView.OnItemSe
                 });
     }
 
+    //Used later to order details by day int
     private void setDayInt(String day) {
         switch (day){
             case "Monday":
@@ -274,8 +240,10 @@ public class AddCourse extends AppCompatActivity implements AdapterView.OnItemSe
             String day = weekday.getSelectedItem().toString().trim();
             setDayInt(day);
 
+            //CourseDetails constructor
             CourseDetails courseDetails = new CourseDetails(Id, day, dayInt, location, startHour, startMinute, finishHour, finishMinute);
 
+            //used to push new details to firebase database
             mStudyDatabaseReference.push().setValue(courseDetails);
 
             Toast.makeText(getApplicationContext(), "Details recorded - Add more or return home", Toast.LENGTH_SHORT).show();
