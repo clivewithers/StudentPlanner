@@ -36,7 +36,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
             getSupportActionBar().setTitle("Register ");
         }
 
-
+        //Initialise FirebaseAuth instance
         mAuth = FirebaseAuth.getInstance();
 
         btnRegister = (Button) findViewById(R.id.btnRegister);
@@ -50,6 +50,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
             startActivity(new Intent(getApplicationContext(), CreateProfile.class));
         }
 
+        //Set onclick listeners
         btnRegister.setOnClickListener(this);
         txtSignIn.setOnClickListener(this);
     }
@@ -59,13 +60,13 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         String password = editTxtPassword.getText().toString().trim();
 
         if(TextUtils.isEmpty(email)){
-            // email is empty
+            // If email is empty display error message
             Toast.makeText(this, "You must enter an email address", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if(TextUtils.isEmpty(password)){
-            // password is empty
+            // If password is empty display an error message
             Toast.makeText(this, "You must enter super secret password", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -80,13 +81,13 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
                         if(task.isSuccessful()){
-                            // user is successfully registered and logged in
+                            // Successful registration and logged in
                             Toast.makeText(getApplicationContext(), "Account created and logged in", Toast.LENGTH_SHORT).show();
                             mAuth.sendPasswordResetEmail(mAuth.getCurrentUser().getEmail());
                             finish();
                             startActivity(new Intent(getApplicationContext(), CreateProfile.class));
                         }else{
-                            Toast.makeText(getApplicationContext(), "The email you entered already exists. Please use sign in page", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "ERROR with process, email may be in use. Check on Login screen or try again", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -97,6 +98,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
             registerUser();
         }
 
+        //Take user to Login activity
         if(v == txtSignIn){
             finish();
             startActivity(new Intent(getApplicationContext(), Login.class));

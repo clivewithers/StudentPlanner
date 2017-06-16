@@ -38,23 +38,28 @@ public class CreateProfile extends AppCompatActivity implements View.OnClickList
             getSupportActionBar().setTitle("Profile");
         }
 
-        //IInastantiate variables
         txtEditStudId = (EditText) findViewById(R.id.txtEditStudentId);
         txtEditFirstName = (EditText) findViewById(R.id.txtEditFirst);
         txtEditLastName = (EditText) findViewById(R.id.txtEditLast);
         spnEditMajor = (Spinner) findViewById(R.id.spnEditMajor);
         btnCreate = (Button) findViewById(R.id.btnCreate);
 
+        //Assign values to dropdown box
         ArrayAdapter<String> institutionAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,
                 getResources().getStringArray(R.array.major));
         spnEditMajor.setAdapter(institutionAdapter);
 
+        //Initialise FirebaseAuth instance
         mFirebaseAuth = FirebaseAuth.getInstance();
+
+        //Check to see if user is currently signed in
         final FirebaseUser user = mFirebaseAuth.getCurrentUser();
 
+        //Gets reference to child nodes in database
         mDetailsDatabaseReference = FirebaseDatabase.getInstance()
                 .getReference().child("student").child(mFirebaseAuth.getCurrentUser().getUid());
 
+        //Set onClick listeners
         btnCreate.setOnClickListener(this);
 
         }
@@ -68,30 +73,40 @@ public class CreateProfile extends AppCompatActivity implements View.OnClickList
     }
 
     public void saveDetails(){
+        if(txtEditStudId.getText().toString().trim().isEmpty()){
+            //Must enter student Id
+            Toast.makeText(this, "You must enter student ID", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(txtEditFirstName.getText().toString().trim().isEmpty()){
+            //Must have first name
+            Toast.makeText(this, "You must have a first name", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        //Must have major selected
         if(spnEditMajor.getSelectedItem().toString().equals("Select Major")){
             Toast.makeText(getApplicationContext(), "No Major selected", Toast.LENGTH_SHORT).show();
-        }else{
-            String Id = txtEditStudId.getText().toString().trim();
-            String first = txtEditFirstName.getText().toString().trim();
-            String last = txtEditLastName.getText().toString().trim();
-            String major = spnEditMajor.getSelectedItem().toString().trim();
-
-            StudentDetails studentDetails = new StudentDetails(Id, first, last, major);
-
-            mDetailsDatabaseReference.setValue(studentDetails);
-
-            Toast.makeText(getApplicationContext(), "Profile created", Toast.LENGTH_SHORT).show();
-            finish();
-            startActivity(new Intent(getApplicationContext(), Home.class));
+            return;
         }
+
+        String Id = txtEditStudId.getText().toString().trim();
+        String first = txtEditFirstName.getText().toString().trim();
+        String last = txtEditLastName.getText().toString().trim();
+        String major = spnEditMajor.getSelectedItem().toString().trim();
+
+        StudentDetails studentDetails = new StudentDetails(Id, first, last, major);
+
+        //Sets values in database
+        mDetailsDatabaseReference.setValue(studentDetails);
+
+        Toast.makeText(getApplicationContext(), "Profile created", Toast.LENGTH_SHORT).show();
+        finish();
+        startActivity(new Intent(getApplicationContext(), Home.class));
     }
     @Override
     public void onClick(View v) {
         if (v == btnCreate){
             saveDetails();
-//            StudentDetails studentDetails = new StudentDetails(txtEditStudId.getText().toString().trim());
-//            mDetailsDatabaseReference.setValue(studentDetails);
-            Toast.makeText(getApplicationContext(), "Details created", Toast.LENGTH_SHORT).show();
         }
     }
 

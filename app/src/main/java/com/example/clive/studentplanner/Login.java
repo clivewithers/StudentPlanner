@@ -36,6 +36,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             getSupportActionBar().setTitle("Login");
         }
 
+        //Initialise FirebaseAuth instance
         mAuth = FirebaseAuth.getInstance();
 
         //Initialize references to views
@@ -45,6 +46,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         editTxtPassword = (EditText) findViewById(R.id.txtPassword);
         progressDialog  = new ProgressDialog(this);
 
+        //Set onClick listeners
         btnSignIn.setOnClickListener(this);
         editTxtRegister.setOnClickListener(this);
 

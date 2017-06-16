@@ -79,6 +79,5 @@ class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.Detai
             textFinishHour = (TextView)itemView.findViewById(R.id.textFinishHour);
             textFinishMinute = (TextView)itemView.findViewById(R.id.textFinishMinute);
         }
-
     }
 }
